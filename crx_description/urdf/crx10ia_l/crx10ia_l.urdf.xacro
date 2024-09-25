@@ -53,19 +53,19 @@
     <xacro:property name="j5_v" value="180"/>
     <xacro:property name="j6_v" value="180"/>
 
-    <xacro:property name="j1_u" value="179.9"/>
-    <xacro:property name="j2_u" value="179.9"/>
-    <xacro:property name="j3_u" value="270"/>
-    <xacro:property name="j4_u" value="190"/>
-    <xacro:property name="j5_u" value="179.9"/>
-    <xacro:property name="j6_u" value="225"/>
+    <xacro:property name="j1_u" value="175"/>
+    <xacro:property name="j2_u" value="175"/>
+    <xacro:property name="j3_u" value="265"/>
+    <xacro:property name="j4_u" value="175"/>
+    <xacro:property name="j5_u" value="175"/>
+    <xacro:property name="j6_u" value="220"/>
 
-    <xacro:property name="j1_l" value="-179.9"/>
-    <xacro:property name="j2_l" value="-179.9"/>
-    <xacro:property name="j3_l" value="-270"/>
-    <xacro:property name="j4_l" value="-190"/>
-    <xacro:property name="j5_l" value="-179.9"/>
-    <xacro:property name="j6_l" value="-225"/>
+    <xacro:property name="j1_l" value="-175"/>
+    <xacro:property name="j2_l" value="-175"/>
+    <xacro:property name="j3_l" value="-265"/>
+    <xacro:property name="j4_l" value="-175"/>
+    <xacro:property name="j5_l" value="-175"/>
+    <xacro:property name="j6_l" value="-220"/>
 
     <xacro:property name="mz_1" value="0.1277"/>
     <xacro:property name="mz_2" value="0.245"/>

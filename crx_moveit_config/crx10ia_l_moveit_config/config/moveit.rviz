@@ -5,9 +5,12 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /MotionPlanning1
+        - /MotionPlanning1/Scene Geometry1
+        - /MotionPlanning1/Scene Robot1
+        - /MotionPlanning1/Planning Request1
         - /MotionPlanning1/Planned Path1
       Splitter Ratio: 0.5
-    Tree Height: 70
+    Tree Height: 373
   - Class: rviz_common/Help
     Name: Help
   - Class: rviz_common/Views
@@ -36,7 +39,7 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
       Value: true
-    - Acceleration_Scaling_Factor: 0.1
+    - Acceleration_Scaling_Factor: 1
       Class: moveit_rviz_plugin/MotionPlanning
       Enabled: true
       Move Group Namespace: ""
@@ -47,7 +50,7 @@ Visualization Manager:
       MoveIt_Planning_Attempts: 10
       MoveIt_Planning_Time: 5
       MoveIt_Use_Cartesian_Path: false
-      MoveIt_Use_Constraint_Aware_IK: false
+      MoveIt_Use_Constraint_Aware_IK: true
       MoveIt_Workspace:
         Center:
           X: 0
@@ -66,71 +69,12 @@ Visualization Manager:
           Expand Joint Details: false
           Expand Link Details: false
           Expand Tree: false
-          J1_link:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          J2_link:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          J3_link:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          J4_link:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          J5_link:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          J6_link:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
           Link Tree Style: Links in Alphabetic Order
-          base_link:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          flange:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-          flange1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-          tcp:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-          tcp_left:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-          tcp_right:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-          wbase:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
         Loop Animation: false
         Robot Alpha: 0.5
         Robot Color: 150; 50; 150
         Show Robot Collision: false
-        Show Robot Visual: true
+        Show Robot Visual: false
         Show Trail: false
         State Display Time: 0.05 s
         Trail Step Size: 1
@@ -155,13 +99,13 @@ Visualization Manager:
         Show Workspace: false
         Start State Alpha: 1
         Start State Color: 0; 255; 0
-      Planning Scene Topic: monitored_planning_scene
+      Planning Scene Topic: /monitored_planning_scene
       Robot Description: robot_description
       Scene Geometry:
         Scene Alpha: 1
-        Scene Color: 50; 230; 50
+        Scene Color: 50; 230; 222
         Scene Display Time: 0.009999999776482582
-        Show Scene Geometry: true
+        Show Scene Geometry: false
         Voxel Coloring: Z-Axis
         Voxel Rendering: Occupied Voxels
       Scene Robot:
@@ -171,71 +115,26 @@ Visualization Manager:
           Expand Joint Details: false
           Expand Link Details: false
           Expand Tree: false
-          J1_link:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          J2_link:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          J3_link:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          J4_link:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          J5_link:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          J6_link:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
           Link Tree Style: Links in Alphabetic Order
-          base_link:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-            Value: true
-          flange:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-          flange1:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-          tcp:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-          tcp_left:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-          tcp_right:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-          wbase:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
-        Robot Alpha: 0.5
+        Robot Alpha: 1
         Show Robot Collision: false
         Show Robot Visual: true
       Value: true
-      Velocity_Scaling_Factor: 0.1
+      Velocity_Scaling_Factor: 1
+    - Class: rviz_default_plugins/TF
+      Enabled: false
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: false
+      Tree:
+        {}
+      Update Interval: 0
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -254,41 +153,41 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 2
+      Distance: 2.094301223754883
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.10000000149011612
-        Y: 0.25
-        Z: 0.30000001192092896
+        X: 0.09535805135965347
+        Y: 0.17881491780281067
+        Z: 0.48557472229003906
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.5
+      Pitch: 0.43979746103286743
       Target Frame: base_link
       Value: Orbit (rviz_default_plugins)
-      Yaw: -0.6230000257492065
+      Yaw: 0.9169789552688599
     Saved: ~
 Window Geometry:
   Displays:
-    collapsed: false
-  Height: 859
+    collapsed: true
+  Height: 987
   Help:
     collapsed: false
-  Hide Left Dock: false
+  Hide Left Dock: true
   Hide Right Dock: false
   MotionPlanning:
-    collapsed: false
+    collapsed: true
   MotionPlanning - Trajectory Slider:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000100000000000002b400000301fc0200000005fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000004100fffffffb000000100044006900730070006c006100790073010000003d000000c9000000c900fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e0067010000010c000001880000017d00fffffffb0000000800480065006c0070000000029a0000006e0000006e00fffffffb0000000a00560069006500770073010000029a000000a4000000a400ffffff000001f60000030100000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000100000000000002b400000385fc0200000005fb00000044004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d0020005400720061006a006500630074006f0072007900200053006c00690064006500720000000000ffffffff0000003f00fffffffb000000100044006900730070006c006100790073000000003b000000c7000000c700fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e00670000000108000002120000016900fffffffb0000000800480065006c0070000000029a0000006e0000006e00fffffffb0000000a005600690065007700730000000320000000a0000000a000ffffff000007740000038500000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
-    collapsed: false
-  Width: 1200
-  X: 261
-  Y: 93
+    collapsed: true
+  Width: 1908
+  X: -20
+  Y: 22
