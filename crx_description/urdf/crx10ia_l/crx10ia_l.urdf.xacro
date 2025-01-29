@@ -62,7 +62,7 @@
 
     <xacro:property name="j1_l" value="-175"/>
     <xacro:property name="j2_l" value="-175"/>
-    <xacro:property name="j3_l" value="-265"/>
+    <xacro:property name="j3_l" value="-85"/>
     <xacro:property name="j4_l" value="-175"/>
     <xacro:property name="j5_l" value="-175"/>
     <xacro:property name="j6_l" value="-220"/>

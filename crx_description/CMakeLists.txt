@@ -17,4 +17,13 @@ endif()
 install(DIRECTORY config launch meshes urdf
   DESTINATION share/${PROJECT_NAME}
 )
+
+install(PROGRAMS
+  scripts/moveit_ik.py
+  scripts/ik_funcs.py
+  scripts/reachability.py
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+
 ament_package()
