@@ -20,7 +20,7 @@ Author: Sammy Pfeiffer <Sammy.Pfeiffer at student.uts.edu.au>
 
 
 class GetIK(object):
-    def __init__(self, group, ik_timeout=1.0, ik_attempts=0,
+    def __init__(self, group, ik_timeout=0.1,
                  avoid_collisions=True, args=None):
         rclpy.init()
         self.node = rclpy.create_node('GetIK')
@@ -30,28 +30,25 @@ class GetIK(object):
         A class to do IK calls thru the MoveIt!'s /compute_ik service.
         :param str group: MoveIt! group name
         :param float ik_timeout: default timeout for IK
-        :param int ik_attempts: default number of attempts
         :param bool avoid_collisions: if to ask for IKs that take
         into account collisions
         """
         self.logger.info("Initalizing GetIK...")
         self.group_name = group
         self.ik_timeout = ik_timeout
-        self.ik_attempts = ik_attempts
         self.avoid_collisions = avoid_collisions
         self.logger.info("Computing IKs for group: " + self.group_name)
         self.logger.info("With IK timeout: " + str(self.ik_timeout))
-        self.logger.info("And IK attempts: " + str(self.ik_attempts))
         self.logger.info("Setting avoid collisions to: " +
                       str(self.avoid_collisions))
         
         self.mp = moveit.MoveItPy(node_name="moveit_py")
         self.logger.info("Connected to MoveIt!")
         
-        # self.ik_srv = self.node.create_client(GetPositionIK, '/compute_ik')
-        # self.logger.info("Waiting for /compute_ik service...")
-        # self.ik_srv.wait_for_service()
-        # self.logger.info("Connected!")
+        self.ik_srv = self.node.create_client(GetPositionIK, '/compute_ik')
+        self.logger.info("Waiting for /compute_ik service...")
+        self.ik_srv.wait_for_service()
+        self.logger.info("Connected!")
         
         self.pc = self.mp.get_planning_component("manipulator")
         self.logger.info("Got planning component")
@@ -70,7 +67,6 @@ class GetIK(object):
     def get_ik(self, pose_stamped,
                group=None,
                ik_timeout=None,
-               ik_attempts=None,
                avoid_collisions=None):
         """
         Do an IK call to pose_stamped pose.
@@ -86,15 +82,13 @@ class GetIK(object):
             group = self.group_name
         if ik_timeout is None:
             ik_timeout = self.ik_timeout
-        if ik_attempts is None:
-            ik_attempts = self.ik_attempts
         if avoid_collisions is None:
             avoid_collisions = self.avoid_collisions
 
         req = GetPositionIK.Request()
         req.ik_request.group_name = group
         req.ik_request.pose_stamped = pose_stamped
-        req.ik_request.timeout = Duration(seconds=ik_timeout).to_msg()
+        req.ik_request.timeout = Duration(seconds=0.5).to_msg()
         req.ik_request.avoid_collisions = avoid_collisions
         req.ik_request.ik_link_name = "tcp"
         
@@ -102,28 +96,31 @@ class GetIK(object):
         success = self.robot_state.set_from_ik("manipulator", pose_stamped.pose, "tcp", ik_timeout)
         
         req.ik_request.timeout = rclpy.duration.Duration(seconds=ik_timeout).to_msg()
-        # self.logger.info(str(type(self.get_current_robot_state())))
-        # req.ik_request.robot_state = robotStateToRobotStateMsg(self.get_current_robot_state())
 
-        if success:
-            # self.logger.info("IK was successful")
-            self.robot_state.update()
-            return 0
-        else:
-            # self.logger.error("IK was not successful")
-            return -1
+        req.ik_request.robot_state = robotStateToRobotStateMsg(self.robot_state)
+
+        # if success:
+        #     # self.logger.info("IK was successful")
+        #     self.robot_state.update()
+        #     return 0
+        # else:
+        #     # self.logger.error("IK was not successful")
+        #     return -1
         
-        # try:
-        #     resp = self.ik_srv.call(req)
-        #     return resp
-        # except Exception as e:
-        #     self.logger.error("Service exception: " + str(e))
-        #     resp = GetPositionIK.Response()
-        #     resp.error_code = 99999  # Failure
-        #     return resp
+        try:
+            self.future = self.ik_srv.call_async(req)
+            rclpy.spin_until_future_complete(self.node, self.future)
+            return self.future.result()
+            # resp = self.ik_srv.call(req)
+            # return resp
+        except Exception as e:
+            self.logger.error("Service exception: " + str(e))
+            resp = GetPositionIK.Response()
+            resp.error_code = 99999  # Failure
+            return resp
 
 def main(args=None):
-    c = GetIK('manipulator', ik_attempts=5, args=args)
+    c = GetIK('manipulator', args=args)
     pose_stamped = PoseStamped()
     pose_stamped.header.frame_id = "base_link"
     pose_stamped.pose.position.x = 0.0
@@ -147,7 +144,7 @@ def main(args=None):
         pose_stamped.pose.position.z = random.uniform(-0.6, 1.9)
 
         resp = c.get_ik(pose_stamped)
-        if resp == 0:#.error_code.val == 1:
+        if resp.error_code.val == 1:
             x.append(pose_stamped.pose.position.x)
             y.append(pose_stamped.pose.position.y)
             z.append(pose_stamped.pose.position.z)

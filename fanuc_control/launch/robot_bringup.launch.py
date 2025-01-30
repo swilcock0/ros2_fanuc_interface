@@ -177,7 +177,7 @@ def launch_setup(context, *args, **kwargs):
         controller_spawner_started,
         robot_state_publisher_node,
         move_group,
-        moveit_rviz,
+        #moveit_rviz,
         gazebo_launch
     ]
 

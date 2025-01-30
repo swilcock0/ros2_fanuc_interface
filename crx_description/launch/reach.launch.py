@@ -28,7 +28,7 @@ def generate_launch_description():
         package="crx_description",
         executable="reachability.py",
         # parameters = [config]
-        parameters=[moveit_config.to_dict(), {"use_sim_time" : True}],
+        parameters=[moveit_config.to_dict()],
     )
     
     ld.add_action(reach)

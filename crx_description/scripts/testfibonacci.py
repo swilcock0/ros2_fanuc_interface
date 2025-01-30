@@ -21,7 +21,7 @@ def fibonacci_sphere(samples=1):
     return points
 
 # Generate points
-N = 1000
+N = 8
 points = fibonacci_sphere(N)
 
 # Extract x, y, z coordinates
